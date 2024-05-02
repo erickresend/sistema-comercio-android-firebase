@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "525616749464",
+    "project_id": "sistema-comercio",
+    "storage_bucket": "sistema-comercio.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:525616749464:android:6db099aec103998fa769ed",
+        "android_client_info": {
+          "package_name": "com.erickresend.sistema_comercio"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCry3IYiruome462ASuVK6TrB74io8mmUg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
