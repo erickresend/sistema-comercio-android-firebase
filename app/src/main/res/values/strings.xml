@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">sistema-comercio</string>
+    <string name="register_title">Cadastre-se</string>
+    <string name="login_title">Login do usuário</string>
+    <string name="hint_email_field">Email</string>
+    <string name="hint_password_field">Senha</string>
+    <string name="text_register_button">Cadastrar</string>
+    <string name="text_login_button">Entrar</string>
+    <string name="text_no_register">Não tem umna conta? Cadastre-se agora mesmo!</string>
 </resources>

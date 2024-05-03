@@ -39,6 +39,10 @@ Faça o download da <a href="apk/app-debug.apk?raw=true">APK diretamente</a>. Vo
 - Minimum SDK level: 22+
 - [Linguagem Kotlin](https://kotlinlang.org/)
 
+- Firebase
+    - Authentication
+    - Firestore Database
+
 <!--
 
 - Jetpack - LISTE O MÁXIMO DE COMPONENTES DO JETPACK QUE VOCÊ USA
