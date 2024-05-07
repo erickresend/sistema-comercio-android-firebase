@@ -1,4 +1,4 @@
-package com.erickresend.sistema_comercio
+package com.erickresend.sistema_comercio.data.models
 
 data class ProductModel(
 

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        tools:layout="@layout/home_fragment"
+        android:name="com.erickresend.sistema_comercio.ui.views.HomeFragment"
+        android:label="Início" >
+        <action
+            android:id="@+id/action_homeFragment_to_productsFragment"
+            app:destination="@id/productsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_customersFragment"
+            app:destination="@id/customersFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_usersFragment"
+            app:destination="@id/usersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/customersFragment"
+        tools:layout="@layout/customers_fragment"
+        android:name="com.erickresend.sistema_comercio.ui.views.CustomersFragment"
+        android:label="Clientes" />
+    <fragment
+        android:id="@+id/usersFragment"
+        tools:layout="@layout/users_fragment"
+        android:name="com.erickresend.sistema_comercio.ui.views.UsersFragment"
+        android:label="Usuários" />
+    <fragment
+        android:id="@+id/productsFragment"
+        tools:layout="@layout/products_fragment"
+        android:name="com.erickresend.sistema_comercio.ui.views.ProductsFragment"
+        android:label="Produtos" />
+</navigation>

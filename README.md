@@ -36,10 +36,10 @@ Faça o download da <a href="apk/app-debug.apk?raw=true">APK diretamente</a>. Vo
 
 ## Tecnologias usadas e bibliotecas de código aberto
 
-- Minimum SDK level: 22+
+- Minimum SDK level: 23+
 - [Linguagem Kotlin](https://kotlinlang.org/)
 
-- Firebase
+- [Firebase](https://firebase.google.com)
     - Authentication
     - Firestore Database
 

@@ -1,18 +1,14 @@
-package com.erickresend.sistema_comercio
+package com.erickresend.sistema_comercio.ui.views
 
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.erickresend.sistema_comercio.databinding.ActivityLoginBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 
 class LoginActivity : AppCompatActivity() {
@@ -42,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { register ->
                         if(register.isSuccessful) {
-                            startActivity(Intent(this, ProductsActivity::class.java))
+                            startActivity(Intent(this, MainActivity::class.java))
                         }
                     }.addOnFailureListener { exception ->
                         val mensagemErro = when(exception) {

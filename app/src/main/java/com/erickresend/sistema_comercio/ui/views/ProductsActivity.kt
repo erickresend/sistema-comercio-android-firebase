@@ -1,4 +1,4 @@
-package com.erickresend.sistema_comercio
+package com.erickresend.sistema_comercio.ui.views
 
 import android.graphics.Color
 import android.os.Bundle
@@ -6,16 +6,15 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.erickresend.sistema_comercio.data.models.ProductModel
 import com.erickresend.sistema_comercio.databinding.ActivityProductsBinding
+import com.erickresend.sistema_comercio.ui.adapters.ProductAdapter
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.Firebase
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.QuerySnapshot
-import com.google.firebase.firestore.firestore
-import com.google.firebase.firestore.toObject
 
 class ProductsActivity : AppCompatActivity() {
 
