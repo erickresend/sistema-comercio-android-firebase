@@ -42,6 +42,9 @@ Faça o download da <a href="apk/app-debug.apk?raw=true">APK diretamente</a>. Vo
 - [Firebase](https://firebase.google.com)
     - Authentication
     - Firestore Database
+- Navigation component
+    - Toolbar navigation
+    - Navigation drawer
 
 <!--
 
