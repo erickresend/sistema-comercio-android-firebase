@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.erickresend.sistema_comercio.data.models.ProductModel
+import com.erickresend.sistema_comercio.databinding.ProductsFragmentBinding
 import com.erickresend.sistema_comercio.databinding.ResProductBinding
 
 class ProductAdapter(private val productsList: ArrayList<ProductModel>): RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
