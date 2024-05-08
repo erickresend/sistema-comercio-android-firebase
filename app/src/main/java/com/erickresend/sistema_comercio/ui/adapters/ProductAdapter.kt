@@ -7,14 +7,7 @@ import com.erickresend.sistema_comercio.data.models.ProductModel
 import com.erickresend.sistema_comercio.databinding.ProductsFragmentBinding
 import com.erickresend.sistema_comercio.databinding.ResProductBinding
 
-class ProductAdapter(private val productsList: ArrayList<ProductModel>): RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
-
-    class ProductViewHolder(private val binding: ResProductBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(product: ProductModel) {
-            binding.textName.text = product.name
-            binding.textPrice.text = product.price.toString()
-        }
-    }
+class ProductAdapter(private var productsList: ArrayList<ProductModel>): RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val binding = ResProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -28,5 +21,17 @@ class ProductAdapter(private val productsList: ArrayList<ProductModel>): Recycle
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product = productsList[position]
         holder.bind(product)
+    }
+
+    class ProductViewHolder(private val binding: ResProductBinding): RecyclerView.ViewHolder(binding.root) {
+        fun bind(product: ProductModel) {
+            binding.textName.text = product.name
+            binding.textPrice.text = product.price.toString()
+        }
+    }
+
+    fun setFilteredList(productsList: ArrayList<ProductModel>) {
+        this.productsList = productsList
+        notifyDataSetChanged()
     }
 }

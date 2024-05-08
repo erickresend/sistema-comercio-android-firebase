@@ -46,13 +46,32 @@
         android:text="Salvar"
         android:textSize="20sp" />
 
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardview_search"
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp"
+        android:layout_marginHorizontal="20dp"
+        app:cardUseCompatPadding="true">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Pesquise aqui..."
+            app:iconifiedByDefault="false" />
+
+    </com.google.android.material.card.MaterialCardView>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
         android:layout_marginTop="32dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:layout_marginHorizontal="20dp"
-        tools:listitem="@layout/res_product"
-        android:layout_height="wrap_content"/>
+        tools:listitem="@layout/res_product" />
 
 </LinearLayout>

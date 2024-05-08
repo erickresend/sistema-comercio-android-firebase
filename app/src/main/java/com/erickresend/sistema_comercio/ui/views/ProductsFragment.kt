@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,12 +19,14 @@ import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.QuerySnapshot
+import java.util.Locale
 
 class ProductsFragment : Fragment() {
 
     private lateinit var _binding: ProductsFragmentBinding
     private lateinit var productList: ArrayList<ProductModel>
     private lateinit var recyclerView: RecyclerView
+    private lateinit var searchView: SearchView
     private lateinit var adapter: ProductAdapter
     private lateinit var db: FirebaseFirestore
 
@@ -40,6 +43,7 @@ class ProductsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         recyclerView = _binding.recyclerview
+        searchView = _binding.searchView
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.setHasFixedSize(true)
 
@@ -48,6 +52,18 @@ class ProductsFragment : Fragment() {
         adapter = ProductAdapter(productList)
 
         recyclerView.adapter = adapter
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filterList(newText)
+                return true
+            }
+
+        })
 
         db = FirebaseFirestore.getInstance()
 
@@ -91,6 +107,23 @@ class ProductsFragment : Fragment() {
                 }.addOnFailureListener {
 
                 }
+        }
+    }
+
+    private fun filterList(query : String?) {
+        if(query != null) {
+            val filteredList = ArrayList<ProductModel>()
+            for(i in productList) {
+                if(i.name?.lowercase(Locale.ROOT)?.contains(query) == true) {
+                    filteredList.add(i)
+                }
+            }
+
+            if (filteredList.isEmpty()) {
+                Toast.makeText(context, "Produto não encontrado", Toast.LENGTH_SHORT).show()
+            } else {
+                adapter.setFilteredList(filteredList)
+            }
         }
     }
 }
