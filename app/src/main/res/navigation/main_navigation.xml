@@ -34,5 +34,22 @@
         android:id="@+id/productsFragment"
         tools:layout="@layout/products_fragment"
         android:name="com.erickresend.sistema_comercio.ui.views.ProductsFragment"
-        android:label="Produtos" />
+        android:label="Produtos" >
+        <action
+            android:id="@+id/action_productsFragment_to_editProductFragment"
+            app:destination="@id/editProductFragment" />
+        <action
+            android:id="@+id/action_productsFragment_to_insertProductFragment"
+            app:destination="@id/insertProductFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProductFragment"
+        tools:layout="@layout/edit_product_fragment"
+        android:name="com.erickresend.sistema_comercio.ui.views.EditProductFragment"
+        android:label="Editar produto" />
+    <fragment
+        android:id="@+id/insertProductFragment"
+        tools:layout="@layout/insert_product_fragment"
+        android:name="com.erickresend.sistema_comercio.ui.views.InsertProductFragment"
+        android:label="Adicionar produto" />
 </navigation>

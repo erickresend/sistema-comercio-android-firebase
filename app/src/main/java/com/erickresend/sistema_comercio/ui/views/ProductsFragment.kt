@@ -1,6 +1,6 @@
 package com.erickresend.sistema_comercio.ui.views
 
-import android.graphics.Color
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,12 +8,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.erickresend.sistema_comercio.R
 import com.erickresend.sistema_comercio.data.models.ProductModel
 import com.erickresend.sistema_comercio.databinding.ProductsFragmentBinding
 import com.erickresend.sistema_comercio.ui.adapters.ProductAdapter
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
@@ -21,14 +22,14 @@ import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.QuerySnapshot
 import java.util.Locale
 
-class ProductsFragment : Fragment() {
+class ProductsFragment : Fragment(), ProductAdapter.OnItemClick {
 
     private lateinit var _binding: ProductsFragmentBinding
     private lateinit var productList: ArrayList<ProductModel>
     private lateinit var recyclerView: RecyclerView
     private lateinit var searchView: SearchView
     private lateinit var adapter: ProductAdapter
-    private lateinit var db: FirebaseFirestore
+    private var db = FirebaseFirestore.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,13 +44,13 @@ class ProductsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         recyclerView = _binding.recyclerview
-        searchView = _binding.searchView
         recyclerView.layoutManager = LinearLayoutManager(context)
+        searchView = _binding.searchView
         recyclerView.setHasFixedSize(true)
 
         productList = arrayListOf()
 
-        adapter = ProductAdapter(productList)
+        adapter = ProductAdapter(productList, this)
 
         recyclerView.adapter = adapter
 
@@ -62,10 +63,7 @@ class ProductsFragment : Fragment() {
                 filterList(newText)
                 return true
             }
-
         })
-
-        db = FirebaseFirestore.getInstance()
 
         db.collection("products")
             .addSnapshotListener(object : EventListener<QuerySnapshot> {
@@ -89,24 +87,8 @@ class ProductsFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        _binding.btnSave.setOnClickListener { view ->
-
-            val productName = _binding.editProductName.text.toString()
-            val productPrice = _binding.editProductPrice.text.toString()
-
-            val productsMap = hashMapOf(
-                "name" to productName,
-                "price" to productPrice.toDouble()
-            )
-
-            db.collection("products").document()
-                .set(productsMap).addOnCompleteListener {
-                    val snackbar = Snackbar.make(view, "Produto salvo com sucesso", Snackbar.LENGTH_SHORT)
-                    snackbar.setBackgroundTint(Color.GREEN)
-                    snackbar.show()
-                }.addOnFailureListener {
-
-                }
+        _binding.btnAdd.setOnClickListener {
+            findNavController().navigate(R.id.action_productsFragment_to_insertProductFragment)
         }
     }
 
@@ -125,5 +107,17 @@ class ProductsFragment : Fragment() {
                 adapter.setFilteredList(filteredList)
             }
         }
+    }
+
+    override fun onClick(product: ProductModel) {
+
+        /*product.documentId?.let {
+            db.collection("products").document(it)
+                .update("name", "DEU CERTO", "price", 20).addOnCanceledListener {
+                    Toast.makeText(context, "Produto alterado", Toast.LENGTH_SHORT).show()
+                }
+        }*/
+
+        findNavController().navigate(R.id.action_productsFragment_to_editProductFragment)
     }
 }
