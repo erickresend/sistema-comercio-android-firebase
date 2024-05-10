@@ -36,12 +36,12 @@
         android:hint="Preço do produto" />
 
     <Button
-        android:id="@+id/btn_save"
+        android:id="@+id/btn_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:backgroundTint="@color/black"
-        android:text="Salvar"
+        android:text="Editar"
         android:textSize="20sp" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

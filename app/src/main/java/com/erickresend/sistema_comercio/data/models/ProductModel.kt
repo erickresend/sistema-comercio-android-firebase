@@ -1,6 +1,7 @@
 package com.erickresend.sistema_comercio.data.models
 
 import com.google.firebase.firestore.DocumentId
+import java.io.Serializable
 
 data class ProductModel(
 
@@ -10,4 +11,4 @@ data class ProductModel(
     val name: String? = null,
 
     val price: Double? = null
-)
+): Serializable

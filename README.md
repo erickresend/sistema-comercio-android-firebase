@@ -45,6 +45,7 @@ Faça o download da <a href="apk/app-debug.apk?raw=true">APK diretamente</a>. Vo
 - Navigation component
     - Toolbar navigation
     - Navigation drawer
+    - Passagem de dados usando safeargs
 - Fragments
 - Recyclerview
 

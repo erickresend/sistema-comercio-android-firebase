@@ -46,7 +46,11 @@
         android:id="@+id/editProductFragment"
         tools:layout="@layout/edit_product_fragment"
         android:name="com.erickresend.sistema_comercio.ui.views.EditProductFragment"
-        android:label="Editar produto" />
+        android:label="Editar produto" >
+        <argument
+            android:name="product"
+            app:argType="com.erickresend.sistema_comercio.data.models.ProductModel" />
+    </fragment>
     <fragment
         android:id="@+id/insertProductFragment"
         tools:layout="@layout/insert_product_fragment"

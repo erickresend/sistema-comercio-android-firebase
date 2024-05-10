@@ -111,13 +111,7 @@ class ProductsFragment : Fragment(), ProductAdapter.OnItemClick {
 
     override fun onClick(product: ProductModel) {
 
-        /*product.documentId?.let {
-            db.collection("products").document(it)
-                .update("name", "DEU CERTO", "price", 20).addOnCanceledListener {
-                    Toast.makeText(context, "Produto alterado", Toast.LENGTH_SHORT).show()
-                }
-        }*/
-
-        findNavController().navigate(R.id.action_productsFragment_to_editProductFragment)
+        val action = ProductsFragmentDirections.actionProductsFragmentToEditProductFragment(product)
+        findNavController().navigate(action)
     }
 }
