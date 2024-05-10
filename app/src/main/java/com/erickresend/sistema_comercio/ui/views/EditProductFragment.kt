@@ -41,12 +41,26 @@ class EditProductFragment : Fragment() {
         _binding.btnEdit.setOnClickListener { view ->
 
             val productName = _binding.editProductName.text.toString()
-            val productPrice = _binding.editProductPrice.text.toString()
+            val productPrice = _binding.editProductPrice.text.toString().toDouble()
 
-            args.product.documentId?.let {
-                db.collection("products").document(it)
-                    .update("name", productName, "price", productPrice).addOnCompleteListener {
+            args.product.documentId?.let {documentId ->
+                db.collection("products").document(documentId)
+                    .update("name", productName, "price", productPrice)
+                    .addOnCompleteListener {
                         val snackbar = Snackbar.make(view, "Produto alterado com sucesso", Snackbar.LENGTH_SHORT)
+                        snackbar.setBackgroundTint(Color.GREEN)
+                        snackbar.show()
+                    }.addOnFailureListener {
+
+                    }
+            }
+        }
+
+        _binding.btnDeleteProduct.setOnClickListener { view ->
+            args.product.documentId?.let {documentId ->
+                db.collection("products").document(documentId).delete()
+                    .addOnCompleteListener {
+                        val snackbar = Snackbar.make(view, "Produto deletado com sucesso", Snackbar.LENGTH_SHORT)
                         snackbar.setBackgroundTint(Color.GREEN)
                         snackbar.show()
                     }.addOnFailureListener {

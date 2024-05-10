@@ -1,6 +1,5 @@
 package com.erickresend.sistema_comercio.ui.views
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -65,7 +64,7 @@ class ProductsFragment : Fragment(), ProductAdapter.OnItemClick {
             }
         })
 
-        db.collection("products")
+        /*db.collection("products")
             .addSnapshotListener(object : EventListener<QuerySnapshot> {
                 override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
 
@@ -81,7 +80,17 @@ class ProductsFragment : Fragment(), ProductAdapter.OnItemClick {
                     }
                     adapter.notifyDataSetChanged()
                 }
-            })
+            })*/
+
+        db.collection("products").get()
+            .addOnSuccessListener {
+                for (document in it) {
+                    productList.add(document.toObject(ProductModel::class.java))
+                }
+                adapter.notifyDataSetChanged()
+            }.addOnFailureListener {
+                Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
+            }
     }
 
     override fun onStart() {

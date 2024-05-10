@@ -44,4 +44,11 @@
         android:text="Editar"
         android:textSize="20sp" />
 
+    <ImageButton
+        android:id="@+id/btn_delete_product"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/img_delete"/>
+
 </androidx.appcompat.widget.LinearLayoutCompat>
