@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        tools:layout="@layout/home_fragment"
         android:name="com.erickresend.sistema_comercio.ui.views.HomeFragment"
-        android:label="Início" >
+        android:label="Início"
+        tools:layout="@layout/home_fragment">
         <action
             android:id="@+id/action_homeFragment_to_productsFragment"
             app:destination="@id/productsFragment" />
@@ -19,22 +19,25 @@
         <action
             android:id="@+id/action_homeFragment_to_usersFragment"
             app:destination="@id/usersFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_pointOfSaleFragment"
+            app:destination="@id/pointOfSaleFragment" />
     </fragment>
     <fragment
         android:id="@+id/customersFragment"
-        tools:layout="@layout/customers_fragment"
         android:name="com.erickresend.sistema_comercio.ui.views.CustomersFragment"
-        android:label="Clientes" />
+        android:label="Clientes"
+        tools:layout="@layout/customers_fragment" />
     <fragment
         android:id="@+id/usersFragment"
-        tools:layout="@layout/users_fragment"
         android:name="com.erickresend.sistema_comercio.ui.views.UsersFragment"
-        android:label="Usuários" />
+        android:label="Usuários"
+        tools:layout="@layout/users_fragment" />
     <fragment
         android:id="@+id/productsFragment"
-        tools:layout="@layout/products_fragment"
         android:name="com.erickresend.sistema_comercio.ui.views.ProductsFragment"
-        android:label="Produtos" >
+        android:label="Produtos"
+        tools:layout="@layout/products_fragment">
         <action
             android:id="@+id/action_productsFragment_to_editProductFragment"
             app:destination="@id/editProductFragment" />
@@ -44,16 +47,30 @@
     </fragment>
     <fragment
         android:id="@+id/editProductFragment"
-        tools:layout="@layout/edit_product_fragment"
         android:name="com.erickresend.sistema_comercio.ui.views.EditProductFragment"
-        android:label="Editar produto" >
+        android:label="Editar produto"
+        tools:layout="@layout/edit_product_fragment">
         <argument
             android:name="product"
             app:argType="com.erickresend.sistema_comercio.data.models.ProductModel" />
     </fragment>
     <fragment
         android:id="@+id/insertProductFragment"
-        tools:layout="@layout/insert_product_fragment"
         android:name="com.erickresend.sistema_comercio.ui.views.InsertProductFragment"
-        android:label="Adicionar produto" />
+        android:label="Adicionar produto"
+        tools:layout="@layout/insert_product_fragment" />
+    <fragment
+        android:id="@+id/pointOfSaleFragment"
+        android:name="com.erickresend.sistema_comercio.ui.views.PointOfSaleFragment"
+        android:label="PointOfSaleFragment"
+        tools:layout="@layout/point_of_sale_fragment">
+        <action
+            android:id="@+id/action_pointOfSaleFragment_to_openPointOfSaleFragment"
+            app:destination="@id/openPointOfSaleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/openPointOfSaleFragment"
+        android:name="com.erickresend.sistema_comercio.ui.views.OpenPointOfSaleFragment"
+        android:label="OpenPointOfSaleFragment"
+        tools:layout="@layout/open_point_of_sale_fragment" />
 </navigation>

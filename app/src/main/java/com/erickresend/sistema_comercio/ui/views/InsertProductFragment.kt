@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.erickresend.sistema_comercio.databinding.InsertProductFragmentBinding
 import com.google.android.material.snackbar.Snackbar
@@ -41,13 +42,13 @@ class InsertProductFragment : Fragment() {
             "price" to productPrice.toDouble()
         )
 
-        db.collection("products").document()
+        val randomNumber = (10000 until 100000).random()
+
+        db.collection("products").document(randomNumber.toString())
             .set(productsMap).addOnCompleteListener {
-                val snackbar = Snackbar.make(view, "Produto salvo com sucesso", Snackbar.LENGTH_SHORT)
+                val snackbar = Snackbar.make(view, "Produto inserido com sucesso", Snackbar.LENGTH_SHORT)
                 snackbar.setBackgroundTint(Color.GREEN)
                 snackbar.show()
-            }.addOnFailureListener {
-
             }
     }
 }

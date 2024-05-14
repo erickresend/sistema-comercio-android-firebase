@@ -1,10 +1,12 @@
 package com.erickresend.sistema_comercio.ui.views
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -14,11 +16,8 @@ import com.erickresend.sistema_comercio.R
 import com.erickresend.sistema_comercio.data.models.ProductModel
 import com.erickresend.sistema_comercio.databinding.ProductsFragmentBinding
 import com.erickresend.sistema_comercio.ui.adapters.ProductAdapter
-import com.google.firebase.firestore.DocumentChange
-import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreException
-import com.google.firebase.firestore.QuerySnapshot
+import java.time.LocalDate
 import java.util.Locale
 
 class ProductsFragment : Fragment(), ProductAdapter.OnItemClick {
@@ -93,6 +92,7 @@ class ProductsFragment : Fragment(), ProductAdapter.OnItemClick {
             }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onStart() {
         super.onStart()
 

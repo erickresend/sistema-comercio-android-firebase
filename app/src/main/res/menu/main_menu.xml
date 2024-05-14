@@ -16,4 +16,8 @@
     <item android:title="Clientes"
         android:id="@+id/customersFragment"
         android:icon="@drawable/img_home"/>
+
+    <item android:title="Ponto de venda"
+        android:id="@+id/pointOfSaleFragment"
+        android:icon="@drawable/img_home"/>
 </menu>
