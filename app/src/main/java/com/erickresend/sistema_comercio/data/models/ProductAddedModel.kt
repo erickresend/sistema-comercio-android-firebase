@@ -6,5 +6,7 @@ data class ProductAddedModel(
 
     val price: Double? = null,
 
-    val quantity: Int? = null
+    val quantity: Int = 1,
+
+    val discount: Double = 0.0
 )

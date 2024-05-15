@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
@@ -13,24 +12,22 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.erickresend.sistema_comercio.R
-import com.erickresend.sistema_comercio.data.models.ProductModel
+import com.erickresend.sistema_comercio.data.models.ProductAddedModel
 import com.erickresend.sistema_comercio.databinding.PointOfSaleFragmentBinding
 import com.erickresend.sistema_comercio.ui.adapters.ProductAddedAdapter
 import com.google.firebase.firestore.FirebaseFirestore
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-class PointOfSaleFragment : Fragment() {
+class PointOfSaleFragment : Fragment(), ProductAddedAdapter.OnItemClick {
 
     private lateinit var _binding: PointOfSaleFragmentBinding
-    private lateinit var productListAdded: ArrayList<ProductModel>
+    private lateinit var productListAdded: ArrayList<ProductAddedModel>
     private lateinit var adapter: ProductAddedAdapter
     private val db = FirebaseFirestore.getInstance()
     private var totalSale: Double = 0.0
 
     private lateinit var spinner: Spinner
-
-    //private var listPayments = resources.getStringArray(R.array.payments_array)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,7 +58,7 @@ class PointOfSaleFragment : Fragment() {
             }
 
         productListAdded = arrayListOf()
-        adapter = ProductAddedAdapter(productListAdded)
+        adapter = ProductAddedAdapter(productListAdded, this)
         _binding.recyclerview.adapter = adapter
 
         spinner  = _binding.spinnerPayments
@@ -94,13 +91,12 @@ class PointOfSaleFragment : Fragment() {
 
         _binding.btnAddProduct.setOnClickListener {
 
-            val productId = _binding.editProductId.text.toString()
             val productName = _binding.textProductName.text.toString()
             val productPrice = _binding.textProductPrice.text.toString().toDouble()
             val quantityProducts = _binding.editQuantityProducts.text.toString().toInt()
             val discount = _binding.editDiscount.text.toString().toDouble()
 
-            val product = ProductModel(productId, productName, productPrice)
+            val product = ProductAddedModel(productName, productPrice, quantityProducts, discount)
  
             productListAdded.add(product)
             adapter.notifyDataSetChanged()
@@ -128,6 +124,18 @@ class PointOfSaleFragment : Fragment() {
                             }
                     }
                 }
+        }
+    }
+
+    override fun onClick(product: ProductAddedModel) {
+        productListAdded.remove(product)
+        adapter.notifyDataSetChanged()
+
+        val valueRemoved = product.price?.times(product.quantity)?.minus(product.discount)
+
+        if (valueRemoved != null) {
+            totalSale -= valueRemoved
+            _binding.textTotalSale.text = totalSale.toString()
         }
     }
 }
