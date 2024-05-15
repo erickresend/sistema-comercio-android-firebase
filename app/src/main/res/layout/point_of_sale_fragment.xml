@@ -13,6 +13,7 @@
 
         <EditText
             android:id="@+id/edit_product_id"
+            android:text="73572"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -43,6 +44,7 @@
     <EditText
         android:id="@+id/edit_quantity_products"
         android:layout_width="match_parent"
+        android:text="2"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:hint="Digite a quantidade vendida" />
@@ -50,6 +52,7 @@
     <EditText
         android:id="@+id/edit_discount"
         android:layout_width="match_parent"
+        android:text="0"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:hint="Desconto" />

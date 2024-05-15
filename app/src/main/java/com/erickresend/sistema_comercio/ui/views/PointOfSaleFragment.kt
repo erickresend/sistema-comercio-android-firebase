@@ -116,13 +116,17 @@ class PointOfSaleFragment : Fragment() {
             val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
             val formattedDate: String = currentDate.format(formatter)
 
-            var totalSaleDay = totalSale
-
+            // Atualizar o valor vendido no dia
             db.collection("pointOfSale").document(formattedDate)
-                .addSnapshotListener { value, error ->
-                    //totalSaleDay = value?.getDouble("totalSaleDay")
-                    val teste = value?.getDouble("change")
-                    Toast.makeText(context, teste.toString(), Toast.LENGTH_SHORT).show()
+                .get().addOnSuccessListener {
+                    val totalSaleDay = it.getDouble("totalSaleDay")
+                    if (totalSaleDay != null) {
+                        db.collection("pointOfSale").document(formattedDate)
+                            .update("totalSaleDay", (totalSaleDay + totalSale))
+                            .addOnSuccessListener {
+                                Toast.makeText(context, "Venda salva com sucesso", Toast.LENGTH_SHORT).show()
+                            }
+                    }
                 }
         }
     }
