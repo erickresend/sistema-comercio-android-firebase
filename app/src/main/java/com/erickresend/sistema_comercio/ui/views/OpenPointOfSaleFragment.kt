@@ -52,7 +52,8 @@ class OpenPointOfSaleFragment: Fragment() {
             val change = _binding.editChange.text.toString().toDouble()
 
             val posMap = hashMapOf(
-                "change" to change
+                "change" to change,
+                "totalSaleDay" to 0.0
             )
 
             db.collection("pointOfSale").document(formattedDate)

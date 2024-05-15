@@ -7,4 +7,12 @@
     <string name="text_register_button">Cadastrar</string>
     <string name="text_login_button">Entrar</string>
     <string name="text_no_register">Não tem umna conta? Cadastre-se agora mesmo!</string>
+
+    <string-array name="payments_array">
+        <item>Dinheiro</item>
+        <item>Pix</item>
+        <item>Débito</item>
+        <item>Crédito</item>
+    </string-array>
+
 </resources>
