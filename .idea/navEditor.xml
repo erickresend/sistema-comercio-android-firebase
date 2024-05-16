@@ -8,6 +8,18 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
+                  <entry key="allPointOfSaleFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="418" />
+                            <option name="y" value="-537" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="customersFragment">
                     <value>
                       <LayoutPositions>
@@ -124,6 +136,11 @@
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_productsFragment_to_allPointOfSaleFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_productsFragment_to_editProductFragment">
                               <value>
                                 <LayoutPositions />

@@ -44,6 +44,9 @@
         <action
             android:id="@+id/action_productsFragment_to_insertProductFragment"
             app:destination="@id/insertProductFragment" />
+        <action
+            android:id="@+id/action_productsFragment_to_allPointOfSaleFragment"
+            app:destination="@id/allPointOfSaleFragment" />
     </fragment>
     <fragment
         android:id="@+id/editProductFragment"
@@ -73,4 +76,9 @@
         android:name="com.erickresend.sistema_comercio.ui.views.OpenPointOfSaleFragment"
         android:label="Abrir ponto de venda diário"
         tools:layout="@layout/open_point_of_sale_fragment" />
+    <fragment
+        android:id="@+id/allPointOfSaleFragment"
+        tools:layout="@layout/all_point_of_sale_fragment"
+        android:name="com.erickresend.sistema_comercio.ui.views.AllPointOfSaleFragment"
+        android:label="Todos os caixas" />
 </navigation>

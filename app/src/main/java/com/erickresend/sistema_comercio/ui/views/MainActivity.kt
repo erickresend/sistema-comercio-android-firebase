@@ -21,8 +21,6 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(_binding.root)
 
-        //getWindow().setStatusBarColor(this.resources.getColor(R.color.primary));
-
         val navHostFragment = (supportFragmentManager.findFragmentById(_binding.fragmentContainerView.id)) as NavHostFragment
         val navController = navHostFragment.navController
         _binding.navigationView.setupWithNavController(navController)

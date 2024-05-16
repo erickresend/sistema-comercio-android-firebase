@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="@color/itensColor">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/text_title_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Data: "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/text_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/text_title_date"
+            app:layout_constraintTop_toTopOf="@id/text_title_date"
+            app:layout_constraintBottom_toBottomOf="@id/text_title_date"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/text_title_change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Troco inicial: "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_title_date"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/text_change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/text_title_change"
+            app:layout_constraintTop_toTopOf="@id/text_title_change"
+            app:layout_constraintBottom_toBottomOf="@id/text_title_change"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/text_title_total_sale_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total vendido: "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_title_change"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/text_total_sale_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/text_title_total_sale_day"
+            app:layout_constraintTop_toTopOf="@id/text_title_total_sale_day"
+            app:layout_constraintBottom_toBottomOf="@id/text_title_total_sale_day"
+            android:textSize="18sp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>
