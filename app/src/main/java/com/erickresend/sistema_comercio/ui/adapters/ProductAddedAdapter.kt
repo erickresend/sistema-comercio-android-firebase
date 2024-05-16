@@ -34,7 +34,6 @@ class ProductAddedAdapter(
         fun bind(product: ProductAddedModel) {
             binding.textProductDescription.text = product.name
             binding.textProductPrice.text = product.price.toString()
-            binding.textProductQuantity.text = product.quantity.toString()
             binding.btnDeleteProduct.setOnClickListener {
                 onItemClick.onClick(product)
             }

@@ -91,18 +91,21 @@ class PointOfSaleFragment : Fragment(), ProductAddedAdapter.OnItemClick {
 
         _binding.btnAddProduct.setOnClickListener {
 
+            val productId = _binding.editProductId.text.toString()
             val productName = _binding.textProductName.text.toString()
             val productPrice = _binding.textProductPrice.text.toString().toDouble()
-            val quantityProducts = _binding.editQuantityProducts.text.toString().toInt()
             val discount = _binding.editDiscount.text.toString().toDouble()
 
-            val product = ProductAddedModel(productName, productPrice, quantityProducts, discount)
+            val product = ProductAddedModel(productId, productName, productPrice, discount)
  
             productListAdded.add(product)
             adapter.notifyDataSetChanged()
 
-            totalSale += (productPrice * quantityProducts) - discount
+            totalSale += productPrice  - discount
             _binding.textTotalSale.text = totalSale.toString()
+
+            _binding.editProductId.setText("")
+            _binding.editDiscount.setText("0")
         }
 
         _binding.btnEndSale.setOnClickListener {
@@ -124,6 +127,13 @@ class PointOfSaleFragment : Fragment(), ProductAddedAdapter.OnItemClick {
                             }
                     }
                 }
+
+            for (product: ProductAddedModel in productListAdded) {
+                product.productId?.let { it1 ->
+                    db.collection("products").document(it1)
+                        .delete()
+                }
+            }
         }
     }
 
@@ -131,7 +141,7 @@ class PointOfSaleFragment : Fragment(), ProductAddedAdapter.OnItemClick {
         productListAdded.remove(product)
         adapter.notifyDataSetChanged()
 
-        val valueRemoved = product.price?.times(product.quantity)?.minus(product.discount)
+        val valueRemoved = product.price
 
         if (valueRemoved != null) {
             totalSale -= valueRemoved

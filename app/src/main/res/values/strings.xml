@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">sistema-comercio</string>
+    <string name="app_name">Sistema Mabelle</string>
     <string name="register_title">Cadastre-se</string>
     <string name="login_title">Login do usuário</string>
     <string name="hint_email_field">Email</string>

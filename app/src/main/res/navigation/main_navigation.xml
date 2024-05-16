@@ -62,7 +62,7 @@
     <fragment
         android:id="@+id/pointOfSaleFragment"
         android:name="com.erickresend.sistema_comercio.ui.views.PointOfSaleFragment"
-        android:label="PointOfSaleFragment"
+        android:label="Ponto de venda"
         tools:layout="@layout/point_of_sale_fragment">
         <action
             android:id="@+id/action_pointOfSaleFragment_to_openPointOfSaleFragment"
@@ -71,6 +71,6 @@
     <fragment
         android:id="@+id/openPointOfSaleFragment"
         android:name="com.erickresend.sistema_comercio.ui.views.OpenPointOfSaleFragment"
-        android:label="OpenPointOfSaleFragment"
+        android:label="Abrir ponto de venda diário"
         tools:layout="@layout/open_point_of_sale_fragment" />
 </navigation>
