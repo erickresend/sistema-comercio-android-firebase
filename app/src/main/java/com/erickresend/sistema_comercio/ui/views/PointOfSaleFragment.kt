@@ -106,7 +106,7 @@ class PointOfSaleFragment : Fragment(), ProductAddedAdapter.OnItemClick {
         }
 
         _binding.btnEndSale.setOnClickListener {
-            val selectedPayment = spinner.selectedItem.toString()
+            //val selectedPayment = spinner.selectedItem.toString()
 
             val currentDate: LocalDate = LocalDate.now()
             val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")

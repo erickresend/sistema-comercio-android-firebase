@@ -53,6 +53,10 @@ class OpenPointOfSaleFragment: Fragment() {
 
             val posMap = hashMapOf(
                 "change" to change,
+                "money" to 0.0,
+                "pix" to 0.0,
+                "credit card" to 0.0,
+                "debit card" to 0.0,
                 "totalSaleDay" to 0.0
             )
 

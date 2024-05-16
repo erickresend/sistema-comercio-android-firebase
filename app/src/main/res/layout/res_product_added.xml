@@ -1,45 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_margin="8dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:backgroundTint="@color/itensColor"
+    app:cardCornerRadius="16dp"
+    android:layout_marginVertical="3dp"
+    android:layout_width="match_parent">
 
-    <TextView
-        android:id="@+id/text_product_description"
-        android:layout_width="wrap_content"
-        android:layout_marginStart="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_height="wrap_content"
-        android:text="Descrição do produto"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_margin="8dp"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/text_product_price"
-        android:layout_width="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/text_product_description"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_height="wrap_content"
-        android:text="Preço do produto"/>
+        <TextView
+            android:id="@+id/text_product_description"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_height="wrap_content"
+            android:text="Descrição do produto"/>
 
-    <TextView
-        android:id="@+id/text_product_quantity"
-        android:layout_width="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/text_product_price"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="16dp"
-        android:text="Quantidade do produto"
-        android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/text_product_price"
+            android:layout_width="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/text_product_description"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_height="wrap_content"
+            android:text="Preço do produto"/>
 
-    <ImageButton
-        android:id="@+id/btn_delete_product"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/img_x"/>
+        <TextView
+            android:id="@+id/text_product_quantity"
+            android:layout_width="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/text_product_price"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            android:text="Quantidade do produto"
+            android:layout_height="wrap_content"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageButton
+            android:id="@+id/btn_delete_product"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/itensColor"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@color/white"
+            android:src="@drawable/img_x"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
+

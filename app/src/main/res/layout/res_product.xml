@@ -4,7 +4,7 @@
     android:id="@+id/card_res_product"
     android:layout_marginHorizontal="16dp"
     android:layout_marginVertical="8dp"
-    android:backgroundTint="#dadada"
+    android:backgroundTint="@color/itensColor"
     android:layout_height="wrap_content">
 
     <LinearLayout

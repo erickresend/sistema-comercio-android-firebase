@@ -3,35 +3,38 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:paddingHorizontal="16dp"
     android:layout_height="match_parent">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="18sp"
         android:text="O caixa do dia ainda não está aberto"/>
 
     <TextView
-
         android:id="@+id/text_current_date"
         android:hint="data atual"
+        android:textSize="18sp"
         android:layout_width="match_parent"
         android:layout_marginTop="16dp"
-        android:layout_marginHorizontal="16dp"
         android:layout_height="wrap_content"/>
 
     <EditText
         android:id="@+id/edit_change"
         android:hint="troco"
+        android:textSize="18sp"
         android:layout_width="match_parent"
         android:layout_marginTop="16dp"
-        android:layout_marginHorizontal="16dp"
         android:layout_height="wrap_content"/>
 
     <Button
         android:id="@+id/btn_open_point_of_sale"
         android:layout_width="match_parent"
         android:layout_marginTop="16dp"
-        android:layout_marginHorizontal="16dp"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/black"
+        android:textSize="18sp"
         android:layout_height="wrap_content"
         android:text="Abrir caixa"/>
 

@@ -42,6 +42,6 @@
         android:layout_margin="20dp"
         android:backgroundTint="@color/black"
         android:text="Salvar"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
