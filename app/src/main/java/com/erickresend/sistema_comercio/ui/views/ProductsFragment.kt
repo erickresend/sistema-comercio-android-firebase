@@ -92,7 +92,6 @@ class ProductsFragment : Fragment(), ProductAdapter.OnItemClick {
             }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onStart() {
         super.onStart()
 

@@ -9,6 +9,8 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.text.set
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.erickresend.sistema_comercio.R
 import com.erickresend.sistema_comercio.databinding.OpenPointOfSaleFragmentBinding
 import com.google.firebase.firestore.FirebaseFirestore
 import java.time.LocalDate
@@ -66,6 +68,12 @@ class OpenPointOfSaleFragment: Fragment() {
                 }.addOnFailureListener {
 
                 }
+
+            findNavController().navigate(R.id.action_openPointOfSaleFragment_to_pointOfSaleFragment)
+        }
+
+        _binding.btnHome.setOnClickListener {
+            findNavController().navigate(R.id.action_openPointOfSaleFragment_to_homeFragment)
         }
     }
 }

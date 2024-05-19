@@ -24,17 +24,5 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        _binding.btnProducts.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_productsFragment)
-        }
-
-        _binding.btnUsers.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_usersFragment)
-        }
-
-        _binding.btnCustomers.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_customersFragment)
-        }
     }
 }

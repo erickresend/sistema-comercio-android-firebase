@@ -27,7 +27,14 @@
         android:id="@+id/customersFragment"
         android:name="com.erickresend.sistema_comercio.ui.views.CustomersFragment"
         android:label="Clientes"
-        tools:layout="@layout/customers_fragment" />
+        tools:layout="@layout/customers_fragment" >
+        <action
+            android:id="@+id/action_customersFragment_to_editCustomerFragment"
+            app:destination="@id/editCustomerFragment" />
+        <action
+            android:id="@+id/action_customersFragment_to_insertCustomerFragment"
+            app:destination="@id/insertCustomerFragment" />
+    </fragment>
     <fragment
         android:id="@+id/usersFragment"
         android:name="com.erickresend.sistema_comercio.ui.views.UsersFragment"
@@ -82,10 +89,31 @@
         android:id="@+id/openPointOfSaleFragment"
         android:name="com.erickresend.sistema_comercio.ui.views.OpenPointOfSaleFragment"
         android:label="Abrir ponto de venda diário"
-        tools:layout="@layout/open_point_of_sale_fragment" />
+        tools:layout="@layout/open_point_of_sale_fragment" >
+        <action
+            android:id="@+id/action_openPointOfSaleFragment_to_pointOfSaleFragment"
+            app:destination="@id/pointOfSaleFragment" />
+        <action
+            android:id="@+id/action_openPointOfSaleFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/allPointOfSaleFragment"
         tools:layout="@layout/all_point_of_sale_fragment"
         android:name="com.erickresend.sistema_comercio.ui.views.AllPointOfSaleFragment"
         android:label="Todos os caixas" />
+    <fragment
+        android:id="@+id/editCustomerFragment"
+        tools:layout="@layout/edit_customer_fragment"
+        android:name="com.erickresend.sistema_comercio.ui.views.EditCustomerFragment"
+        android:label="Editar cliente" >
+        <argument
+            android:name="customer"
+            app:argType="com.erickresend.sistema_comercio.data.models.CustomerModel" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/insert_customer_fragment"
+        android:id="@+id/insertCustomerFragment"
+        android:name="com.erickresend.sistema_comercio.ui.views.InsertCustomerFragment"
+        android:label="Novo cliente" />
 </navigation>
