@@ -42,11 +42,12 @@ Faça o download da <a href="apk/app-debug.apk?raw=true">APK diretamente</a>. Vo
 - [Firebase](https://firebase.google.com)
     - Authentication
     - Firestore Database
-    - Listar, aletar e deletar itens do firestore
+    - Listar, alterar e deletar itens do firestore
 - Navigation component
     - Toolbar navigation
     - Navigation drawer
-    - Passagem de dados usando o argumens do navigation com safeargs
+    - Bottom navigation view
+    - Passagem de dados usando o arguments do navigation com safeargs
 - Fragments
 - Recyclerview
 
