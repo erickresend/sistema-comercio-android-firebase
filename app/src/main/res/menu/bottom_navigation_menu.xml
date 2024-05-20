@@ -7,10 +7,10 @@
 
     <item android:title="Clientes"
         android:id="@+id/customersFragment"
-        android:icon="@drawable/img_home"/>
+        android:icon="@drawable/img_customer"/>
 
     <item android:title="Produtos"
         android:id="@+id/productsFragment"
-        android:icon="@drawable/img_home"/>
+        android:icon="@drawable/img_bag"/>
 
 </menu>

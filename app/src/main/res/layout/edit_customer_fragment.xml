@@ -68,7 +68,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:backgroundTint="@color/white"
-        android:src="@drawable/img_delete"/>
+        android:contentDescription="TODO"
+        android:src="@drawable/img_remove_user"/>
 
 
 

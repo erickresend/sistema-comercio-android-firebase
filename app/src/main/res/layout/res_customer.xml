@@ -1,51 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_res_customer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_marginHorizontal="16dp"
+    app:cardCornerRadius="10dp"
+    android:layout_marginTop="8dp"
     android:backgroundTint="@color/itensColor">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/text_title_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:text="Nome: "
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/text_name"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:paddingTop="8dp"
+            android:text="Erick Vinicius Amaral Resende"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/text_title_name"
+            app:layout_constraintStart_toEndOf="@+id/text_title_name"
+            app:layout_constraintTop_toTopOf="@id/text_title_name" />
+
+        <TextView
+            android:id="@+id/text_title_cpf"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:text="Nome" />
+            android:paddingStart="16dp"
+            android:paddingTop="4dp"
+            android:text="Cpf: "
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_title_name" />
 
         <TextView
             android:id="@+id/text_cpf"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:text="CPF" />
+            android:paddingTop="4dp"
+            android:text="11428636625"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/text_title_cpf"
+            app:layout_constraintStart_toEndOf="@id/text_title_cpf"
+            app:layout_constraintTop_toTopOf="@id/text_title_cpf" />
+
+        <TextView
+            android:id="@+id/text_title_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingTop="4dp"
+            android:text="Cpf: "
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_title_cpf" />
 
         <TextView
             android:id="@+id/text_phone"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:text="Celular" />
+            android:paddingTop="4dp"
+            android:text="33999665927"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/text_title_phone"
+            app:layout_constraintStart_toEndOf="@id/text_title_phone"
+            app:layout_constraintTop_toTopOf="@id/text_title_phone" />
+
+        <TextView
+            android:id="@+id/text_title_birth_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingTop="4dp"
+            android:text="Data de nascimento: "
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_title_phone" />
 
         <TextView
             android:id="@+id/text_birth_date"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:text="Data de nascimento" />
+            android:paddingTop="4dp"
+            android:text="17/08/1993"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/text_title_birth_date"
+            app:layout_constraintStart_toEndOf="@id/text_title_birth_date"
+            app:layout_constraintTop_toTopOf="@id/text_title_birth_date" />
+
+        <TextView
+            android:id="@+id/text_title_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="8dp"
+            android:text="Endereço: "
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_title_birth_date" />
 
         <TextView
             android:id="@+id/text_address"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:text="Endereço" />
+            android:paddingTop="4dp"
+            android:paddingBottom="8dp"
+            android:text="Rua Paraíba 1420 Alvorada"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/text_title_address"
+            app:layout_constraintStart_toEndOf="@id/text_title_address"
+            app:layout_constraintTop_toTopOf="@id/text_title_address" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

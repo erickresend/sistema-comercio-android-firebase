@@ -8,29 +8,29 @@
 
     <item
         android:id="@+id/productsFragment"
-        android:icon="@drawable/img_home"
+        android:icon="@drawable/img_clothes"
         android:title="Produtos" />
 
     <item
         android:id="@+id/usersFragment"
-        android:icon="@drawable/img_home"
+        android:icon="@drawable/img_user"
         android:title="Usuários" />
 
     <item
         android:id="@+id/customersFragment"
-        android:icon="@drawable/img_home"
+        android:icon="@drawable/img_customer"
         android:title="Clientes" />
 
     <item android:title="Ponto de venda">
         <menu>
             <item
                 android:id="@+id/pointOfSaleFragment"
-                android:icon="@drawable/img_home"
-                android:title="Lançar uma venda" />
+                android:icon="@drawable/img_bag"
+                android:title="Lançar venda" />
 
             <item
                 android:id="@+id/allPointOfSaleFragment"
-                android:icon="@drawable/img_home"
+                android:icon="@drawable/img_paper"
                 android:title="Todos os pdv's" />
         </menu>
     </item>
