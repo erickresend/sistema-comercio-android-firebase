@@ -50,6 +50,7 @@ Faça o download da <a href="apk/app-debug.apk?raw=true">APK diretamente</a>. Vo
     - Passagem de dados usando o arguments do navigation com safeargs
 - Fragments
 - Recyclerview
+- [Maskara](https://github.com/santalu/maskara)
 
 <!--
 

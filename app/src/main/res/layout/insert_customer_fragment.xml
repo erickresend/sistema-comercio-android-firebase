@@ -1,63 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
     android:padding="16dp">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Nome:"
+        android:textSize="16sp" />
+
     <EditText
         android:id="@+id/edit_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="Nome"
-        android:textSize="25sp" />
+        android:inputType="textCapWords"
+        android:maxLength="30"
+        android:maxLines="1"
+        android:paddingTop="16dp"
+        android:textSize="16sp" />
 
-    <EditText
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="CPF:"
+        android:textSize="16sp" />
+
+    <com.santalu.maskara.widget.MaskEditText
         android:id="@+id/edit_cpf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="CPF"
         android:inputType="number"
-        android:textSize="25sp" />
+        android:paddingTop="16dp"
+        android:textSize="16sp"
+        app:mask="___.___.___-__"
+        app:maskCharacter="_"
+        app:maskStyle="completable" />
 
-    <EditText
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Celular:"
+        android:textSize="16sp" />
+
+    <com.santalu.maskara.widget.MaskEditText
         android:id="@+id/edit_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="Celular"
         android:inputType="number"
-        android:textSize="25sp" />
+        android:paddingTop="16dp"
+        android:textSize="16sp"
+        app:mask="+55 (__) _____-____"
+        app:maskCharacter="_"
+        app:maskStyle="completable" />
 
-    <EditText
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Data de nascimento:"
+        android:textSize="16sp" />
+
+    <com.santalu.maskara.widget.MaskEditText
         android:id="@+id/edit_birth_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:inputType="date"
-        android:hint="Data de nascimento"
-        android:textSize="25sp" />
+        android:paddingTop="16dp"
+        android:textSize="16sp"
+        app:mask="__/__/____"
+        app:maskCharacter="_" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Endereço:"
+        android:textSize="16sp" />
 
     <EditText
         android:id="@+id/edit_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="Endereço"
-        android:textSize="25sp" />
+        android:inputType="textCapWords"
+        android:maxLength="60"
+        android:lines="2"
+        android:paddingTop="16dp"
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/btn_save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/secondary"
         android:layout_marginTop="16dp"
-        android:text="Salvar" />
+        android:backgroundTint="@color/secondary"
+        android:text="Salvar"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

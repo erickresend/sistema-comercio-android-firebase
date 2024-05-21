@@ -110,7 +110,7 @@ class ProductsFragment : Fragment(), ProductAdapter.OnItemClick {
             }
 
             if (filteredList.isEmpty()) {
-                Toast.makeText(context, "Produto não encontrado", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(context, "Produto não encontrado", Toast.LENGTH_SHORT).show()
             } else {
                 adapter.setFilteredList(filteredList)
             }

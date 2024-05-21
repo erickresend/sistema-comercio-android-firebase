@@ -41,18 +41,27 @@ class EditProductFragment : Fragment() {
         _binding.btnEdit.setOnClickListener { view ->
 
             val productName = _binding.editProductName.text.toString()
-            val productPrice = _binding.editProductPrice.text.toString().toDouble()
+            val productPrice = _binding.editProductPrice.text.toString()
 
-            args.product.documentId?.let {documentId ->
-                db.collection("products").document(documentId)
-                    .update("name", productName, "price", productPrice)
-                    .addOnCompleteListener {
-                        val snackbar = Snackbar.make(view, "Produto alterado com sucesso", Snackbar.LENGTH_SHORT)
-                        snackbar.setBackgroundTint(Color.GREEN)
-                        snackbar.show()
-                    }.addOnFailureListener {
+            if (productName.isEmpty() || productName.isBlank() ||
+                productPrice.isEmpty() || productPrice.isBlank()) {
+                val snackbar = Snackbar.make(view, "Preencha todos os campos!", Snackbar.LENGTH_SHORT)
+                snackbar.setBackgroundTint(Color.RED)
+                snackbar.show()
+            } else {
+                args.product.documentId?.let {documentId ->
+                    db.collection("products").document(documentId)
+                        .update(
+                            "name", productName,
+                            "price", productPrice.toDouble())
+                        .addOnCompleteListener {
+                            val snackbar = Snackbar.make(view, "Produto alterado com sucesso", Snackbar.LENGTH_SHORT)
+                            snackbar.setBackgroundTint(Color.GREEN)
+                            snackbar.show()
+                        }.addOnFailureListener {
 
-                    }
+                        }
+                }
             }
         }
 

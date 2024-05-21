@@ -56,4 +56,7 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.8.1"))
     implementation("com.google.firebase:firebase-firestore")
     implementation("com.google.firebase:firebase-auth")
+
+    // Maskara - https://github.com/santalu/maskara
+    implementation("com.github.santalu:maskara:1.0.0")
 }

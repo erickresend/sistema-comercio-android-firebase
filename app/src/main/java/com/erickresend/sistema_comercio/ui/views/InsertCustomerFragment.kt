@@ -32,27 +32,34 @@ class InsertCustomerFragment : Fragment() {
         _binding.btnSave.setOnClickListener { view ->
 
             val customerName = _binding.editName.text.toString()
-            val customerCpf = _binding.editCpf.text.toString()
-            val customerPhone = _binding.editPhone.text.toString()
-            val customerBirthDate = _binding.editBirthDate.text.toString()
+            val customerCpf = _binding.editCpf.masked
+            val customerPhone = _binding.editPhone.masked
+            val customerBirthDate = _binding.editBirthDate.masked
             val customerAddress = _binding.editAddress.text.toString()
 
-            val customersMap = hashMapOf(
-                "name" to customerName,
-                "cpf" to customerCpf,
-                "phone" to customerPhone,
-                "birthDate" to customerBirthDate,
-                "address" to customerAddress
-            )
+            if (customerName.isBlank() || customerName.isBlank() ||
+                customerAddress.isBlank() || customerAddress.isBlank()) {
+                val snackbar = Snackbar.make(view, "Preencha todos os campos!", Snackbar.LENGTH_SHORT)
+                snackbar.setBackgroundTint(Color.RED)
+                snackbar.show()
+            } else {
+                val customersMap = hashMapOf(
+                    "name" to customerName,
+                    "cpf" to customerCpf,
+                    "phone" to customerPhone,
+                    "birthDate" to customerBirthDate,
+                    "address" to customerAddress
+                )
 
-            db.collection("customers").document()
-                .set(customersMap).addOnCompleteListener {
-                    val snackbar = Snackbar.make(view, "Cliente inserido com sucesso", Snackbar.LENGTH_SHORT)
-                    snackbar.setBackgroundTint(Color.GREEN)
-                    snackbar.show()
-                }.addOnFailureListener {
+                db.collection("customers").document()
+                    .set(customersMap).addOnCompleteListener {
+                        val snackbar = Snackbar.make(view, "Cliente inserido com sucesso", Snackbar.LENGTH_SHORT)
+                        snackbar.setBackgroundTint(Color.GREEN)
+                        snackbar.show()
+                    }.addOnFailureListener {
 
-                }
+                    }
+            }
         }
     }
 }

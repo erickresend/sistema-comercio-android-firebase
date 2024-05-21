@@ -44,27 +44,34 @@ class EditCustomerFragment : Fragment() {
         _binding.btnEdit.setOnClickListener { view ->
 
             val customerName = _binding.editName.text.toString()
-            val customerCpf = _binding.editCpf.text.toString()
-            val customerPhone = _binding.editPhone.text.toString()
-            val customerBirthDate = _binding.editBirthDate.text.toString()
+            val customerCpf = _binding.editCpf.masked
+            val customerPhone = _binding.editPhone.masked
+            val customerBirthDate = _binding.editBirthDate.masked
             val customerAddress = _binding.editAddress.text.toString()
 
-            args.customer.documentId?.let {documentId ->
-                db.collection("customers").document(documentId)
-                    .update(
-                        "name", customerName,
-                        "cpf", customerCpf,
-                        "phone", customerPhone,
-                        "birthDate", customerBirthDate,
-                        "address", customerAddress
-                    ).addOnCompleteListener {
-                        val snackbar = Snackbar.make(view, "Cliente alterado com sucesso", Snackbar.LENGTH_SHORT)
-                        snackbar.setBackgroundTint(Color.GREEN)
-                        snackbar.show()
-                        activity?.onBackPressedDispatcher?.onBackPressed()
-                    }.addOnFailureListener {
+            if (customerName.isBlank() || customerName.isBlank() ||
+                customerAddress.isBlank() || customerAddress.isBlank()) {
+                val snackbar = Snackbar.make(view, "Preencha todos os campos!", Snackbar.LENGTH_SHORT)
+                snackbar.setBackgroundTint(Color.RED)
+                snackbar.show()
+            } else {
+                args.customer.documentId?.let {documentId ->
+                    db.collection("customers").document(documentId)
+                        .update(
+                            "name", customerName,
+                            "cpf", customerCpf,
+                            "phone", customerPhone,
+                            "birthDate", customerBirthDate,
+                            "address", customerAddress
+                        ).addOnCompleteListener {
+                            val snackbar = Snackbar.make(view, "Cliente alterado com sucesso", Snackbar.LENGTH_SHORT)
+                            snackbar.setBackgroundTint(Color.GREEN)
+                            snackbar.show()
+                            activity?.onBackPressedDispatcher?.onBackPressed()
+                        }.addOnFailureListener {
 
-                    }
+                        }
+                }
             }
         }
 
