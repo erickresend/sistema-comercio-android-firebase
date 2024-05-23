@@ -50,7 +50,9 @@ class EditCustomerFragment : Fragment() {
             val customerAddress = _binding.editAddress.text.toString()
 
             if (customerName.isBlank() || customerName.isBlank() ||
-                customerAddress.isBlank() || customerAddress.isBlank()) {
+                !_binding.editCpf.isDone || !_binding.editPhone.isDone ||
+                !_binding.editBirthDate.isDone || customerAddress.isBlank() ||
+                customerAddress.isBlank()) {
                 val snackbar = Snackbar.make(view, "Preencha todos os campos!", Snackbar.LENGTH_SHORT)
                 snackbar.setBackgroundTint(Color.RED)
                 snackbar.show()

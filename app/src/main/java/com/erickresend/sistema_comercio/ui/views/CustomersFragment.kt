@@ -89,7 +89,7 @@ class CustomersFragment : Fragment(), CustomerAdapter.OnItemClick {
             }
 
             if (filteredList.isEmpty()) {
-                Toast.makeText(context, "Cliente não encontrado", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(context, "Cliente não encontrado", Toast.LENGTH_SHORT).show()
             } else {
                 adapter.setFilteredList(filteredList)
             }

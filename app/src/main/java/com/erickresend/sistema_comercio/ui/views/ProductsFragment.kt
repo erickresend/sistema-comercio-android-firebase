@@ -17,6 +17,7 @@ import com.erickresend.sistema_comercio.data.models.ProductModel
 import com.erickresend.sistema_comercio.databinding.ProductsFragmentBinding
 import com.erickresend.sistema_comercio.ui.adapters.ProductAdapter
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import java.time.LocalDate
 import java.util.Locale
 
@@ -28,6 +29,8 @@ class ProductsFragment : Fragment(), ProductAdapter.OnItemClick {
     private lateinit var searchView: SearchView
     private lateinit var adapter: ProductAdapter
     private var db = FirebaseFirestore.getInstance()
+
+    private lateinit var nextQuery: Query
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,30 +66,18 @@ class ProductsFragment : Fragment(), ProductAdapter.OnItemClick {
             }
         })
 
-        /*db.collection("products")
-            .addSnapshotListener(object : EventListener<QuerySnapshot> {
-                override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
+        db.collection("products").orderBy("name").limit(3)
+            .get().addOnSuccessListener { documents ->
 
-                    if(error != null) {
-                        Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show()
-                        return
-                    }
+                val lastDocument = documents.documents[documents.size() - 1]
+                nextQuery = db.collection("products").orderBy("name").startAfter(lastDocument).limit(3)
 
-                    for(dc : DocumentChange in  value?.documentChanges!!) {
-                        if(dc.type == DocumentChange.Type.ADDED) {
-                            productList.add(dc.document.toObject(ProductModel::class.java))
-                        }
+                if (lastDocument.exists()) {
+                    for (document in documents) {
+                        productList.add(document.toObject(ProductModel::class.java))
                     }
                     adapter.notifyDataSetChanged()
                 }
-            })*/
-
-        db.collection("products").get()
-            .addOnSuccessListener {
-                for (document in it) {
-                    productList.add(document.toObject(ProductModel::class.java))
-                }
-                adapter.notifyDataSetChanged()
             }.addOnFailureListener {
                 Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
             }
@@ -97,6 +88,24 @@ class ProductsFragment : Fragment(), ProductAdapter.OnItemClick {
 
         _binding.btnAdd.setOnClickListener {
             findNavController().navigate(R.id.action_productsFragment_to_insertProductFragment)
+        }
+
+        _binding.btnShowMore.setOnClickListener {
+
+            nextQuery.get().addOnSuccessListener { documents ->
+
+                val lastDocument = documents.documents[documents.size() - 1]
+                nextQuery = db.collection("products").orderBy("name").startAfter(lastDocument).limit(3)
+
+                if (lastDocument.exists()) {
+                    for (document in documents) {
+                        productList.add(document.toObject(ProductModel::class.java))
+                    }
+                    adapter.notifyDataSetChanged()
+                }
+                }.addOnFailureListener {
+                    Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
+                }
         }
     }
 
