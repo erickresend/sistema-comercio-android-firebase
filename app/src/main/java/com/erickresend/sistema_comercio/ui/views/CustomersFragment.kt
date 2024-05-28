@@ -1,5 +1,6 @@
 package com.erickresend.sistema_comercio.ui.views
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -60,8 +61,13 @@ class CustomersFragment : Fragment(), CustomerAdapter.OnItemClick {
             }
         })
 
+        val dialog = context?.let { Dialog(it) }
+        dialog?.setContentView(R.layout.dialog_loading)
+        dialog?.show()
+
         db.collection("customers").get()
             .addOnSuccessListener {
+                dialog?.dismiss()
                 for (document in it) {
                     customerList.add(document.toObject(CustomerModel::class.java))
                 }

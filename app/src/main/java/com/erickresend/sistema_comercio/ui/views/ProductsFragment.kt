@@ -1,5 +1,6 @@
 package com.erickresend.sistema_comercio.ui.views
 
+import android.app.Dialog
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -66,17 +67,24 @@ class ProductsFragment : Fragment(), ProductAdapter.OnItemClick {
             }
         })
 
+        val dialog = context?.let { Dialog(it) }
+        dialog?.setContentView(R.layout.dialog_loading)
+        dialog?.show()
+
         db.collection("products").orderBy("name").limit(3)
             .get().addOnSuccessListener { documents ->
 
-                val lastDocument = documents.documents[documents.size() - 1]
-                nextQuery = db.collection("products").orderBy("name").startAfter(lastDocument).limit(3)
+                dialog?.dismiss()
 
-                if (lastDocument.exists()) {
+                if (documents.size() > 0) {
+                    val lastDocument = documents.documents[documents.size() - 1]
+                    nextQuery = db.collection("products").orderBy("name").startAfter(lastDocument).limit(3)
                     for (document in documents) {
                         productList.add(document.toObject(ProductModel::class.java))
                     }
                     adapter.notifyDataSetChanged()
+                } else {
+                    _binding.btnShowMore.visibility = View.INVISIBLE
                 }
             }.addOnFailureListener {
                 Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
@@ -91,21 +99,27 @@ class ProductsFragment : Fragment(), ProductAdapter.OnItemClick {
         }
 
         _binding.btnShowMore.setOnClickListener {
+            val dialog = context?.let { Dialog(it) }
+            dialog?.setContentView(R.layout.dialog_loading)
+            dialog?.show()
 
             nextQuery.get().addOnSuccessListener { documents ->
 
-                val lastDocument = documents.documents[documents.size() - 1]
-                nextQuery = db.collection("products").orderBy("name").startAfter(lastDocument).limit(3)
+                dialog?.dismiss()
 
-                if (lastDocument.exists()) {
+                if (documents.size() > 0) {
+                    val lastDocument = documents.documents[documents.size() - 1]
+                    nextQuery = db.collection("products").orderBy("name").startAfter(lastDocument).limit(3)
                     for (document in documents) {
                         productList.add(document.toObject(ProductModel::class.java))
                     }
                     adapter.notifyDataSetChanged()
+                } else {
+                    _binding.btnShowMore.visibility = View.INVISIBLE
                 }
-                }.addOnFailureListener {
-                    Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
-                }
+            }.addOnFailureListener {
+                Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

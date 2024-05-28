@@ -1,12 +1,28 @@
 <resources>
     <string name="app_name">Sistema Mabelle</string>
+
     <string name="register_title">Cadastre-se</string>
     <string name="login_title">Login do usuário</string>
     <string name="hint_email_field">Email</string>
     <string name="hint_password_field">Senha</string>
     <string name="text_register_button">Cadastrar</string>
+    <string name="text_change_button">Alterar</string>
     <string name="text_login_button">Entrar</string>
-    <string name="text_no_register">Não tem umna conta? Cadastre-se agora mesmo!</string>
+    <string name="text_no_register_1">Não tem uma conta?</string>
+    <string name="text_no_register_2">Cadastre-se</string>
+    <string name="text_recovery_password_1">Esqueceu seus dados de login?</string>
+    <string name="text_recovery_password_2">Recuperar</string>
+
+    <string name="empty_fields">Preencha todos os campos</string>
+    <string name="minimum_password">Digite uma senha com no mínimo 6 caracteres!</string>
+    <string name="input_valid_email">Insira um email válido!</string>
+    <string name="no_internet_connection">Sem conexão com a internet!</string>
+    <string name="error_register_user">Erro ao cadastrar usuário!</string>
+    <string name="error_login_user">Erro ao logar usuário!</string>
+    <string name="success_register_user">Sucesso ao cadastrar usuário!</string>
+    <string name="account_already_registered">Esta conta já foi cadastrada!</string>
+    <string name="text_recovery_password">Após inserir o email, verique a caixa de entrada e siga as instruções para alteração da senha.</string>
+    <string name="text_recover_password_snackbar">Verifique o seu email</string>
 
     <string-array name="payments_array">
         <item>Dinheiro</item>

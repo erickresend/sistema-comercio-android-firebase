@@ -1,5 +1,6 @@
 package com.erickresend.sistema_comercio.ui.views
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

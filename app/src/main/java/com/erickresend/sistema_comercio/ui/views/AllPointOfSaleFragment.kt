@@ -1,5 +1,6 @@
 package com.erickresend.sistema_comercio.ui.views
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.erickresend.sistema_comercio.R
 import com.erickresend.sistema_comercio.data.models.PointOfSaleModel
 import com.erickresend.sistema_comercio.databinding.AllPointOfSaleFragmentBinding
 import com.erickresend.sistema_comercio.ui.adapters.PointOfSaleAdapter
@@ -38,8 +40,15 @@ class AllPointOfSaleFragment : Fragment() {
         adapter = PointOfSaleAdapter(pointOfSaleList)
         _binding.recyclerview.adapter = adapter
 
+        val dialog = context?.let { Dialog(it) }
+        dialog?.setContentView(R.layout.dialog_loading)
+        dialog?.show()
+
         db.collection("pointOfSale").get()
             .addOnSuccessListener {
+
+                dialog?.dismiss()
+
                 for (document in it) {
                     pointOfSaleList.add(document.toObject(PointOfSaleModel::class.java))
                 }

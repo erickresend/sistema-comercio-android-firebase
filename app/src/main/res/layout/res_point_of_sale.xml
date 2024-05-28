@@ -12,58 +12,72 @@
         android:orientation="vertical">
 
         <TextView
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
             android:id="@+id/text_title_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Data: "
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:textSize="18sp"/>
+            android:textSize="16sp"/>
 
         <TextView
+            android:paddingStart="8dp"
+            android:paddingTop="8dp"
             android:id="@+id/text_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@id/text_title_date"
             app:layout_constraintTop_toTopOf="@id/text_title_date"
             app:layout_constraintBottom_toBottomOf="@id/text_title_date"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <TextView
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
             android:id="@+id/text_title_change"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Troco inicial: "
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_title_date"
-            android:textSize="18sp"/>
+            android:textSize="16sp"/>
 
         <TextView
+            android:paddingStart="8dp"
+            android:paddingTop="8dp"
             android:id="@+id/text_change"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@id/text_title_change"
             app:layout_constraintTop_toTopOf="@id/text_title_change"
             app:layout_constraintBottom_toBottomOf="@id/text_title_change"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <TextView
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
             android:id="@+id/text_title_total_sale_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Total vendido: "
+            android:paddingBottom="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_title_change"
-            android:textSize="18sp"/>
+            android:textSize="16sp"/>
 
         <TextView
+            android:paddingStart="8dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
             android:id="@+id/text_total_sale_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@id/text_title_total_sale_day"
             app:layout_constraintTop_toTopOf="@id/text_title_total_sale_day"
             app:layout_constraintBottom_toBottomOf="@id/text_title_total_sale_day"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
