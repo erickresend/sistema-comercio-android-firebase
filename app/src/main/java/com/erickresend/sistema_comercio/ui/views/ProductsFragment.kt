@@ -1,13 +1,11 @@
 package com.erickresend.sistema_comercio.ui.views
 
 import android.app.Dialog
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -19,10 +17,9 @@ import com.erickresend.sistema_comercio.databinding.ProductsFragmentBinding
 import com.erickresend.sistema_comercio.ui.adapters.ProductAdapter
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import java.time.LocalDate
-import java.util.Locale
 
-class ProductsFragment : Fragment(), ProductAdapter.OnItemClick {
+class ProductsFragment : Fragment(), ProductAdapter.OnItemClick,
+    ProductAdapter.LastItemShownRecyclerview {
 
     private lateinit var _binding: ProductsFragmentBinding
     private lateinit var productList: ArrayList<ProductModel>
@@ -32,6 +29,7 @@ class ProductsFragment : Fragment(), ProductAdapter.OnItemClick {
     private var db = FirebaseFirestore.getInstance()
 
     private lateinit var nextQuery: Query
+    private var searching = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,7 +50,7 @@ class ProductsFragment : Fragment(), ProductAdapter.OnItemClick {
 
         productList = arrayListOf()
 
-        adapter = ProductAdapter(productList, this)
+        adapter = ProductAdapter(productList, this, this)
 
         recyclerView.adapter = adapter
 
@@ -62,33 +60,13 @@ class ProductsFragment : Fragment(), ProductAdapter.OnItemClick {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                filterList(newText)
+                searching = true
+                searchName(newText.toString())
                 return true
             }
         })
 
-        val dialog = context?.let { Dialog(it) }
-        dialog?.setContentView(R.layout.dialog_loading)
-        dialog?.show()
-
-        db.collection("products").orderBy("name").limit(3)
-            .get().addOnSuccessListener { documents ->
-
-                dialog?.dismiss()
-
-                if (documents.size() > 0) {
-                    val lastDocument = documents.documents[documents.size() - 1]
-                    nextQuery = db.collection("products").orderBy("name").startAfter(lastDocument).limit(3)
-                    for (document in documents) {
-                        productList.add(document.toObject(ProductModel::class.java))
-                    }
-                    adapter.notifyDataSetChanged()
-                } else {
-                    _binding.btnShowMore.visibility = View.INVISIBLE
-                }
-            }.addOnFailureListener {
-                Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
-            }
+        showItensDB()
     }
 
     override fun onStart() {
@@ -97,52 +75,88 @@ class ProductsFragment : Fragment(), ProductAdapter.OnItemClick {
         _binding.btnAdd.setOnClickListener {
             findNavController().navigate(R.id.action_productsFragment_to_insertProductFragment)
         }
-
-        _binding.btnShowMore.setOnClickListener {
-            val dialog = context?.let { Dialog(it) }
-            dialog?.setContentView(R.layout.dialog_loading)
-            dialog?.show()
-
-            nextQuery.get().addOnSuccessListener { documents ->
-
-                dialog?.dismiss()
-
-                if (documents.size() > 0) {
-                    val lastDocument = documents.documents[documents.size() - 1]
-                    nextQuery = db.collection("products").orderBy("name").startAfter(lastDocument).limit(3)
-                    for (document in documents) {
-                        productList.add(document.toObject(ProductModel::class.java))
-                    }
-                    adapter.notifyDataSetChanged()
-                } else {
-                    _binding.btnShowMore.visibility = View.INVISIBLE
-                }
-            }.addOnFailureListener {
-                Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    private fun filterList(query : String?) {
-        if(query != null) {
-            val filteredList = ArrayList<ProductModel>()
-            for(i in productList) {
-                if(i.name?.lowercase(Locale.ROOT)?.contains(query) == true) {
-                    filteredList.add(i)
-                }
-            }
-
-            if (filteredList.isEmpty()) {
-                //Toast.makeText(context, "Produto não encontrado", Toast.LENGTH_SHORT).show()
-            } else {
-                adapter.setFilteredList(filteredList)
-            }
-        }
     }
 
     override fun onClick(product: ProductModel) {
 
         val action = ProductsFragmentDirections.actionProductsFragmentToEditProductFragment(product)
         findNavController().navigate(action)
+    }
+
+    override fun lastItemShownRecyclerview(isShow: Boolean) {
+        if (!searching) {
+            showMoreItensDB()
+        }
+    }
+
+    private fun showItensDB() {
+        val dialog = context?.let { Dialog(it) }
+        dialog?.setContentView(R.layout.dialog_loading)
+        dialog?.show()
+
+        productList.clear()
+
+        db.collection("products").orderBy("name").limit(8)
+            .get().addOnSuccessListener { documents ->
+
+                dialog?.dismiss()
+
+                if (documents.size() > 0) {
+                    val lastDocument = documents.documents[documents.size() - 1]
+                    nextQuery = db.collection("products").orderBy("name").startAfter(lastDocument).limit(8)
+                    for (document in documents) {
+                        productList.add(document.toObject(ProductModel::class.java))
+                    }
+                    adapter.notifyDataSetChanged()
+                }
+            }.addOnFailureListener {
+                Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun showMoreItensDB() {
+        val dialog = context?.let { Dialog(it) }
+        dialog?.setContentView(R.layout.dialog_loading)
+        dialog?.show()
+
+        nextQuery.get().addOnSuccessListener { documents ->
+
+            dialog?.dismiss()
+
+            if (documents.size() > 0) {
+                val lastDocument = documents.documents[documents.size() - 1]
+                nextQuery = db.collection("products").orderBy("name").startAfter(lastDocument).limit(8)
+                for (document in documents) {
+                    productList.add(document.toObject(ProductModel::class.java))
+                }
+                adapter.notifyDataSetChanged()
+            }
+        }.addOnFailureListener {
+            Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun searchName(newText: String) {
+
+        db.collection("products").orderBy("name").startAt(newText)
+            .endAt(newText+"\uf8ff").limit(8)
+            .get().addOnSuccessListener { documents ->
+
+                if (newText == "") {
+                    searching = false
+                    showItensDB()
+                } else if (documents.size() > 0) {
+
+                    productList.clear()
+
+                    for (document in documents) {
+                        productList.add(document.toObject(ProductModel::class.java))
+                    }
+                    adapter.notifyDataSetChanged()
+                } else {
+                    productList.clear()
+                    adapter.notifyDataSetChanged()
+                }
+            }
     }
 }

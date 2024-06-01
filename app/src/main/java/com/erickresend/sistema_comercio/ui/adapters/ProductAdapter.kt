@@ -9,7 +9,8 @@ import com.erickresend.sistema_comercio.databinding.ResProductBinding
 
 class ProductAdapter(
     private var productsList: ArrayList<ProductModel>,
-    var onItemClick: OnItemClick
+    var onItemClick: OnItemClick,
+    private var lastItemShownRecyclerview: LastItemShownRecyclerview
 ): RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -24,24 +25,29 @@ class ProductAdapter(
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product = productsList[position]
         holder.bind(product)
+
+        if (position == itemCount - 1) {
+            lastItemShownRecyclerview.lastItemShownRecyclerview(true)
+        }
     }
 
     interface OnItemClick {
         fun onClick(product: ProductModel)
     }
 
+    interface LastItemShownRecyclerview {
+
+        fun lastItemShownRecyclerview(isShow: Boolean)
+    }
+
     inner class ProductViewHolder(private val binding: ResProductBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(product: ProductModel) {
             binding.textName.text = product.name
             binding.textPrice.text = product.price.toString()
+            binding.textId.text = product.documentId
             binding.cardResProduct.setOnClickListener {
                 onItemClick.onClick(product)
             }
         }
-    }
-
-    fun setFilteredList(productsList: ArrayList<ProductModel>) {
-        this.productsList = productsList
-        notifyDataSetChanged()
     }
 }

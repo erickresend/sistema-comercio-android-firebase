@@ -16,9 +16,10 @@ import com.erickresend.sistema_comercio.data.models.CustomerModel
 import com.erickresend.sistema_comercio.databinding.CustomersFragmentBinding
 import com.erickresend.sistema_comercio.ui.adapters.CustomerAdapter
 import com.google.firebase.firestore.FirebaseFirestore
-import java.util.Locale
+import com.google.firebase.firestore.Query
 
-class CustomersFragment : Fragment(), CustomerAdapter.OnItemClick {
+class CustomersFragment : Fragment(), CustomerAdapter.OnItemClick,
+    CustomerAdapter.LastCustomerShownRecyclerview {
 
     private lateinit var _binding: CustomersFragmentBinding
     private lateinit var customerList: ArrayList<CustomerModel>
@@ -26,6 +27,9 @@ class CustomersFragment : Fragment(), CustomerAdapter.OnItemClick {
     private lateinit var searchView: SearchView
     private lateinit var adapter: CustomerAdapter
     private var db = FirebaseFirestore.getInstance()
+
+    private lateinit var nextQuery: Query
+    private var searching = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,7 +50,7 @@ class CustomersFragment : Fragment(), CustomerAdapter.OnItemClick {
 
         customerList = arrayListOf()
 
-        adapter = CustomerAdapter(customerList, this)
+        adapter = CustomerAdapter(customerList, this, this)
 
         recyclerView.adapter = adapter
 
@@ -56,49 +60,20 @@ class CustomersFragment : Fragment(), CustomerAdapter.OnItemClick {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                filterList(newText)
+                searching = true
+                searchName(newText.toString())
                 return true
             }
         })
-
-        val dialog = context?.let { Dialog(it) }
-        dialog?.setContentView(R.layout.dialog_loading)
-        dialog?.show()
-
-        db.collection("customers").get()
-            .addOnSuccessListener {
-                dialog?.dismiss()
-                for (document in it) {
-                    customerList.add(document.toObject(CustomerModel::class.java))
-                }
-                adapter.notifyDataSetChanged()
-            }.addOnFailureListener {
-                Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
-            }
     }
 
     override fun onStart() {
         super.onStart()
 
+        showCustomersDB()
+
         _binding.btnAdd.setOnClickListener {
             findNavController().navigate(R.id.action_customersFragment_to_insertCustomerFragment)
-        }
-    }
-
-    private fun filterList(query : String?) {
-        if(query != null) {
-            val filteredList = ArrayList<CustomerModel>()
-            for(i in customerList) {
-                if(i.name?.lowercase(Locale.ROOT)?.contains(query) == true) {
-                    filteredList.add(i)
-                }
-            }
-
-            if (filteredList.isEmpty()) {
-                //Toast.makeText(context, "Cliente não encontrado", Toast.LENGTH_SHORT).show()
-            } else {
-                adapter.setFilteredList(filteredList)
-            }
         }
     }
 
@@ -106,5 +81,82 @@ class CustomersFragment : Fragment(), CustomerAdapter.OnItemClick {
 
         val action = CustomersFragmentDirections.actionCustomersFragmentToEditCustomerFragment(customer)
         findNavController().navigate(action)
+    }
+
+    override fun lastCustomerShownRecyclerview(isShow: Boolean) {
+        if (!searching) {
+            showMoreCustomersDB()
+        }
+    }
+
+    private fun showCustomersDB() {
+        val dialog = context?.let { Dialog(it) }
+        dialog?.setContentView(R.layout.dialog_loading)
+        dialog?.show()
+
+        customerList.clear()
+
+        db.collection("customers").orderBy("name").limit(8)
+            .get().addOnSuccessListener { documents ->
+
+                dialog?.dismiss()
+
+                if (documents.size() > 0) {
+                    val lastDocument = documents.documents[documents.size() - 1]
+                    nextQuery = db.collection("customers").orderBy("name").startAfter(lastDocument).limit(3)
+                    for (document in documents) {
+                        customerList.add(document.toObject(CustomerModel::class.java))
+                    }
+                    adapter.notifyDataSetChanged()
+                }
+            }.addOnFailureListener {
+                Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun showMoreCustomersDB() {
+        val dialog = context?.let { Dialog(it) }
+        dialog?.setContentView(R.layout.dialog_loading)
+        dialog?.show()
+
+        nextQuery.get().addOnSuccessListener { documents ->
+
+            dialog?.dismiss()
+
+            if (documents.size() > 0) {
+                val lastDocument = documents.documents[documents.size() - 1]
+                nextQuery = db.collection("customers").orderBy("name").startAfter(lastDocument).limit(8)
+                for (document in documents) {
+                    customerList.add(document.toObject(CustomerModel::class.java))
+                }
+                adapter.notifyDataSetChanged()
+            }
+        }.addOnFailureListener {
+            Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun searchName(newText: String) {
+
+        db.collection("customers").orderBy("name").startAt(newText)
+            .endAt(newText+"\uf8ff").limit(8)
+            .get().addOnSuccessListener { documents ->
+
+                if (newText == "") {
+                    searching = false
+                    showCustomersDB()
+                } else if (documents.size() > 0) {
+
+                    customerList.clear()
+
+                    for (document in documents) {
+                        customerList.add(document.toObject(CustomerModel::class.java))
+                    }
+                    adapter.notifyDataSetChanged()
+                } else {
+                    customerList.clear()
+                    adapter.notifyDataSetChanged()
+                }
+            }
     }
 }

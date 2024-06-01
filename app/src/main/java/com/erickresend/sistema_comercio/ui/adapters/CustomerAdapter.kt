@@ -8,7 +8,8 @@ import com.erickresend.sistema_comercio.databinding.ResCustomerBinding
 
 class CustomerAdapter(
     private var customersList: ArrayList<CustomerModel>,
-    var onItemClick: OnItemClick
+    var onItemClick: OnItemClick,
+    private var lastCustomerShownRecyclerview: LastCustomerShownRecyclerview
 ) : RecyclerView.Adapter<CustomerAdapter.CustomerViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomerViewHolder {
@@ -23,10 +24,19 @@ class CustomerAdapter(
     override fun onBindViewHolder(holder: CustomerViewHolder, position: Int) {
         val customer = customersList[position]
         holder.bind(customer)
+
+        if (position == itemCount - 1) {
+            lastCustomerShownRecyclerview.lastCustomerShownRecyclerview(true)
+        }
     }
 
     interface OnItemClick {
         fun onClick(customer: CustomerModel)
+    }
+
+    interface LastCustomerShownRecyclerview {
+
+        fun lastCustomerShownRecyclerview(isShow: Boolean)
     }
 
     inner class CustomerViewHolder(private val binding: ResCustomerBinding) : RecyclerView.ViewHolder(binding.root) {

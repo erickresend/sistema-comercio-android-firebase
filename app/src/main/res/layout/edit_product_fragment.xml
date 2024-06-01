@@ -11,15 +11,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Descrição:"
-        android:textSize="16sp"/>
+        android:textSize="16sp" />
 
     <EditText
-        android:maxLength="20"
-        android:inputType="textCapWords"
         android:id="@+id/edit_product_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:inputType="textCapSentences"
+        android:maxLength="20"
         android:paddingTop="16dp" />
 
     <TextView
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Preço:"
-        android:textSize="16sp"/>
+        android:textSize="16sp" />
 
     <EditText
         android:id="@+id/edit_product_price"
@@ -35,8 +35,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:maxLength="7"
-        android:textSize="16sp"
-        android:paddingTop="16dp" />
+        android:paddingTop="16dp"
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/btn_edit"
